@@ -1,0 +1,27 @@
+<% if (messages && messages.error && messages.error.length > 0) { %>
+<div class="flex justify-center">
+    <div 
+    class="absolute mt-4 px-6 py-4 z-50 rounded-lg shadow-lg transition-opacity duration-300 ease-in-out animate-bounce  bg-white text-black"
+    id="flashMessage"
+>
+    <div class="flex items-center justify-between space-x-4">
+        <span><%= messages.error %></span>
+        <button 
+            onclick="document.getElementById('flashMessage').remove()" 
+            class="text-xl font-bold leading-none focus:outline-none hover:text-red-600"
+        >&times;</button>
+    </div>
+</div>
+</div>
+
+<script>
+    setTimeout(() => {
+        const flash = document.getElementById("flashMessage");
+        if (flash) {
+            flash.classList.add("opacity-0");
+            setTimeout(() => flash.remove(), 3000000);
+        }
+    }, 1000);
+</script>
+<% } %>
+

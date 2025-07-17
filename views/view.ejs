@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wakket</title>
+  <link href="/styles/style.css" rel="stylesheet" />
+  <link rel="icon" href="/images/wallet_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" class="bg-white">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward_ios" />
+
+</head>
+
+<body>
+  <% if (messages) {%>
+        <%- include('partials/flash', {messages}) %>
+    <% } %>
+
+  <div class="main-wrapper relative max-w-7xl min-h-[88vh] mx-auto px-4 py-8 dark:bg-neutral-950">
+
+
+    <div class="navbar flex gap-2 items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" height="36px" width="36px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+        <path d="M240-160q-66 0-113-47T80-320v-320q0-66 47-113t113-47h480q66 0 113 47t47 113v320q0 66-47 113t-113 47H240Zm0-480h480q22 0 42 5t38 16v-21q0-33-23.5-56.5T720-720H240q-33 0-56.5 23.5T160-640v21q18-11 38-16t42-5Zm-74 130 445 108q9 2 18 0t17-8l139-116q-11-15-28-24.5t-37-9.5H240q-26 0-45.5 13.5T166-510Z" />
+      </svg>
+
+      <div class=" tracking-tighter text-3xl font-bold text-primary flex gap-2 items-center">Wakket</div>
+    </div>
+
+    <div class="border w-full border-neutral-200 p-8 rounded-md mt-8 cursor-pointer">
+      <div class="flex justify-between ">
+        <div class="text-4xl">Your Secret Phrase</div>
+
+
+        <div class="rotate-90">
+          <span class="exp_button material-symbols-outlined rotate-0 inline" style="cursor:pointer;">
+            arrow_forward_ios
+          </span>
+        </div>
+      </div>
+      <div class="phrase_grid grid lg:grid-cols-4 md:grid-cols-2 w-full gap-2 mt-8 hidden ">
+        <%mnemonic.forEach((word)=>{ %>
+        <div class="p-4 bg-zinc-100 rounded-md text-lg tracking-wider"><%=word%></div>
+
+
+        <% }) %>
+
+
+      </div>
+
+    </div>
+    <div class="flex flex-wrap justify-center md:justify-between mt-16">
+      <h1 class="text-4xl min-w-sm text-center  md:text-left md:font-normal">Solana Wallets</h1>
+      <div class="inline-flex gap-2 mt-4">
+
+        <form action="/generatekeys" method="post">
+          <button type="submit" class="add_wallet min-w-16 px-6 py-2 bg-zinc-900 text-white rounded-4xl hover:bg-stone-800 transition-colors">
+            Add Wallet
+          </button>
+        </form>
+
+
+        <form action="/clearwallets" method="post">
+          <button type="submit" class="clear_wallets  px-6 py-2 bg-red-500 text-white rounded-4xl hover:bg-red-700 transition-colors">
+            Clear Wallets
+          </button>
+        </form>
+      </div>
+
+    </div>
+    <%wallets.forEach((wallet,id)=>{  %>
+    <div class="border border-zinc-200 py-2 px-8 rounded-t-lg mt-8">
+      <div class="flex justify-between items-center w-full bg-white">
+
+
+        <div class="text-3xl">Wallet <%= id+1 %></div>
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="100" viewBox="0 0 30 30" class="cursor-pointer">
+          <path fill="red" d="M 14.984375 2.4863281 A 1.0001 1.0001 0 0 0 14 3.5 L 14 4 L 8.5 4 A 1.0001 1.0001 0 0 0 7.4863281 5 L 6 5 A 1.0001 1.0001 0 1 0 6 7 L 24 7 A 1.0001 1.0001 0 1 0 24 5 L 22.513672 5 A 1.0001 1.0001 0 0 0 21.5 4 L 16 4 L 16 3.5 A 1.0001 1.0001 0 0 0 14.984375 2.4863281 z M 6 9 L 7.7929688 24.234375 C 7.9109687 25.241375 8.7633438 26 9.7773438 26 L 20.222656 26 C 21.236656 26 22.088031 25.241375 22.207031 24.234375 L 24 9 L 6 9 z"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="bg-zinc-200 rounded-b-md p-8 flex flex-col gap-2 ">
+      <div class="text-2xl font-semibold ">Public Key</div>
+      <div class="text-lg mb-2 text-stone-800 w-full truncate"><%= wallet.keys.publicKey %></div>
+      <div class="text-2xl font-semibold ">Private Key</div>
+      <div class="flex justify-between items-center">
+        <input type="password" class="pvt_key w-full truncate outline-none text-lg text-stone-800 tracking-wider" value=<%= wallet.keys.secretKey %> readonly>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" hidden lucide lucide-eye-off size-6 text-stone-800 cursor-pointer ">
+          <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"></path>
+          <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"></path>
+          <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"></path>
+          <path d="m2 2 20 20"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" lucide lucide-eye size-6 text-stone-800 cursor-pointer">
+          <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </div>
+    </div>
+
+    <%  }) %>
+
+
+
+
+    <script src="/scripts/script.js"></script>
+
+
+
+
+
+  </div>
+
+
+
+  </div>
+
+  <section class="items-end max-w-7xl  mx-auto border-t border-0.2 border-zinc-200 px-4 ">
+    <div class="flex justify-between pt-8 ">
+      <p class="text-primary tracking-tight">Designed and Developed by <a class="font-bold" href="https://www.linkedin.com/in/subhajeet-gorai-781170242/">Jeet</a></p>
+    </div>
+  </section>
+  </div>
+</body>
+
+</html>
