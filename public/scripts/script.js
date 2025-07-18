@@ -1,43 +1,49 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.querySelector(".exp_button");
-  const content = document.querySelector(".phrase_grid");
-
+const btn = document.querySelector(".exp_button");
+const content = document.querySelector(".phrase_grid");
+if (btn && content && btn.parentElement && btn.parentElement.parentElement) {
   btn.parentElement.parentElement.addEventListener("click", function () {
     btn.classList.toggle("rotate-180");
     content.classList.toggle("hidden");
-
-    
-    
+    console.log("hello")
   });
-  
-  })
+}
 
-document.addEventListener("DOMContentLoaded", function () {
-  const eyeIconOff= document.querySelector(".lucide-eye-off");
-  const eyeIcon= document.querySelector(".lucide-eye");
-  const pvtKeyInput = document.querySelector(".pvt_key");
-  [eyeIconOff,eyeIcon].forEach((icon)=>{
-    icon.addEventListener("click",()=>{
-    pvtKeyInput.type == "password" ? pvtKeyInput.type = "text" : pvtKeyInput.type = "password";
-    eyeIcon.classList.toggle("hidden");
-    eyeIconOff.classList.toggle("hidden");
-  });
-  });
-});
+const eyeIcon = document.querySelectorAll(".lucide-eye-off");
+const eyeIconOff = document.querySelectorAll(".lucide-eye");
+const pvtKeyInput = document.querySelectorAll(".pvt_key");
 
-document.addEventListener("DOMContentLoaded", function () {
-  const mnemonic = document.querySelector(".mnemonic");
-  const inputbtn = document.querySelector(".submitbutton");
-
-  if (mnemonic && inputbtn) {
-    mnemonic.addEventListener("input", () => {
-      if (mnemonic.value.trim() !== "") {
-        inputbtn.value = "Add Wallet";
-      } else {
-        inputbtn.value = "Generate Wallet"; 
+if (eyeIconOff.length && eyeIcon.length && pvtKeyInput.length) {
+  eyeIconOff.forEach((iconOff, idx) => {
+    iconOff.addEventListener("click", () => {
+      if (pvtKeyInput[idx]) {
+        pvtKeyInput[idx].type = "text";
+        eyeIcon[idx].classList.remove("hidden");
+        iconOff.classList.add("hidden");
       }
     });
-  }
-});
+  });
+
+  eyeIcon.forEach((icon, idx) => {
+    icon.addEventListener("click", () => {
+      if (pvtKeyInput[idx]) {
+        pvtKeyInput[idx].type = "password";
+        icon.classList.add("hidden");
+        eyeIconOff[idx].classList.remove("hidden");
+      }
+    });
+  });
+}
 
 
+
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const mnemonic = document.querySelector(".inputphrase");
+    const inputbtn = document.querySelector(".submitbutton");
+    
+    
+    mnemonic.addEventListener("input",()=>{
+      inputbtn.value=="   Add Wallet   "
+    })
+  });
+  

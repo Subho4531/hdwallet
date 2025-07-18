@@ -26,8 +26,8 @@
     <div class="tracking-normal text-5xl mt-16 font-bold sm:font-normal">Secret Recovery Phrase</div>
 
     <div class="text-3xl text-zinc-600 mt-3">Save this words in a safe place</div>
-    <form class="flex gap-2 flex-wrap md:flex-nowrap justify-center " action="/create" method="post">
-      <input type="text" name="recoveryPhrase" placeholder="Enter your recovery phrase (or leave blank to generate)" class="mnemonic mt-8 px-6 py-2 bg-stone-100 text-stone-950 rounded-4xl w-screen focus:outline-none focus:ring-2 focus:ring-stone-900 dark:bg-neutral-800 dark:text-white dark:focus:ring-neutral-200" />
+    <form class="form flex gap-2 flex-wrap md:flex-nowrap justify-center " action="/create" method="post">
+      <input type="text" name="recoveryPhrase" placeholder="Enter your recovery phrase (or leave blank to generate)" class="inputphrase mt-8 px-6 py-2 bg-stone-100 text-stone-950 rounded-4xl w-screen focus:outline-none focus:ring-2 focus:ring-stone-900 dark:bg-neutral-800 dark:text-white dark:focus:ring-neutral-200" />
 
       <input  type="submit" class="submitbutton mt-8 px-6 py-2 bg-stone-900 text-white rounded-4xl hover:bg-stone-800 transition-colors w-full md:w-auto" value="Generate Wallet" />
 
@@ -41,6 +41,7 @@
     </div>
   </section>
   </div>
+  <script src="/scripts/script.js"></script>
 </body>
 
 </html>
