@@ -25,19 +25,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const mnemonic = document.querySelector(".mnemonic");
-//   const inputbtn = document.querySelector(".submitbutton");
+document.addEventListener("DOMContentLoaded", function () {
+  const mnemonic = document.querySelector(".mnemonic");
+  const inputbtn = document.querySelector(".submitbutton");
 
-//   if (mnemonic && inputbtn) {
-//     mnemonic.addEventListener("input", () => {
-//       if (mnemonic.value.trim() !== "") {
-//         inputbtn.value = "Add Wallet";
-//       } else {
-//         inputbtn.value = "Generate Wallet"; 
-//       }
-//     });
-//   }
-// });
+  if (mnemonic && inputbtn) {
+    mnemonic.addEventListener("input", () => {
+      if (mnemonic.value.trim() !== "") {
+        inputbtn.value = "Add Wallet";
+      } else {
+        inputbtn.value = "Generate Wallet"; 
+      }
+    });
+  }
+});
 
 
