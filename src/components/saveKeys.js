@@ -1,6 +1,4 @@
 const generateKeys = require("./generateKeys");
-const {LocalStorage} = require('node-localstorage');
-const localStorage = new LocalStorage('./scratch');
 
 module.exports=(mnemonic,req,res)=>{
     let walletsRaw = req.cookies.wallets;
