@@ -5,10 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   btn.parentElement.parentElement.addEventListener("click", function () {
     btn.classList.toggle("rotate-180");
     content.classList.toggle("hidden");
+
+    
     
   });
+  
   })
-
 
 document.addEventListener("DOMContentLoaded", function () {
   const eyeIconOff= document.querySelector(".lucide-eye-off");
@@ -22,3 +24,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   });
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const mnemonic = document.querySelector(".mnemonic");
+//   const inputbtn = document.querySelector(".submitbutton");
+
+//   if (mnemonic && inputbtn) {
+//     mnemonic.addEventListener("input", () => {
+//       if (mnemonic.value.trim() !== "") {
+//         inputbtn.value = "Add Wallet";
+//       } else {
+//         inputbtn.value = "Generate Wallet"; 
+//       }
+//     });
+//   }
+// });
+
+
