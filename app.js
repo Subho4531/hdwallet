@@ -5,8 +5,7 @@ const generateMnemonic = require("./src/components/generateMnemonic");
 const cookieParser = require("cookie-parser");
 const generateKeys = require("./src/components/generateKeys");
 const saveKeys = require("./src/components/saveKeys");
-const {LocalStorage} = require('node-localstorage');
-const localStorage = new LocalStorage('./scratch');
+
 const flash  = require("connect-flash");
 const session = require("express-session");
 
