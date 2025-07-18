@@ -8,7 +8,9 @@ const saveKeys = require("./src/components/saveKeys");
 const {LocalStorage} = require('node-localstorage');
 const localStorage = new LocalStorage('./scratch');
 const flash  = require("connect-flash");
-const session = require("express-session")
+const session = require("express-session");
+
+
 
 
 
@@ -25,11 +27,14 @@ app.use(session({
 app.use(flash());
 
 app.get("/", (req, res) => {
+  if(req.cookies.mnemonic){
+    return res.redirect("/view")
+  }
   res.render("index");
 });
 
-app.get("/create", (req, res) => {
- 
+app.get("/create", async(req, res) => {
+  
   res.render("create",{messages:req.flash()});
 });
 
@@ -57,15 +62,18 @@ app.post("/create", (req, res) => {
   }
   
   
-  res.cookie("mnemonic", mnemonic, { maxAge:999999, httpOnly: true });
-  saveKeys(mnemonic.join(" "),0);
+  res.cookie("mnemonic", mnemonic, { maxAge:999999999999999});
+  saveKeys(mnemonic.join(" "),req,res);
   res.redirect("/view");
 }
 );
 
 app.get("/view", (req, res) => {
   const mnemonic = req.cookies.mnemonic;
-  var wallets = JSON.parse(localStorage.getItem("wallets"));
+  if(!mnemonic){
+    res.redirect("/create");
+  }
+  var wallets = JSON.parse(req.cookies.wallets);
   if(!wallets) wallets = [];
   res.render("view", { mnemonic ,wallets ,messages:req.flash()});
 });
@@ -74,7 +82,7 @@ app.post("/generatekeys", (req, res) => {
   const mnemonic = req.cookies.mnemonic.join(" ");
   
   
-  saveKeys(mnemonic);
+  saveKeys(mnemonic,req,res);
 
   
 
@@ -84,8 +92,17 @@ res.redirect("/view");
 
 
 app.post("/clearwallets",(req,res)=>{
-  localStorage.clear()
+  res.clearCookie("wallets")
+  res.clearCookie("mnemonic")
   res.redirect("/");
+})
+app.post("/delete/:id",(req,res)=>{
+  const wallets=JSON.parse(req.cookies.wallets);
+  const id=parseInt(req.params.id);
+  wallets.splice(id,1);
+ 
+  res.cookie("wallets",JSON.stringify(wallets))
+  res.redirect("/view");
 })
 
 

@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.querySelector(".exp_button");
   const content = document.querySelector(".phrase_grid");
-  btn.parentElement.parentElement.parentElement.addEventListener("click", function () {
+
+  btn.parentElement.parentElement.addEventListener("click", function () {
     btn.classList.toggle("rotate-180");
     content.classList.toggle("hidden");
+    
   });
-});
+  })
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const eyeIconOff= document.querySelector(".lucide-eye-off");
